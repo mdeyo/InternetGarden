@@ -1,8 +1,9 @@
 #!/usr/bin/python
 import os
-from flask import Flask, request, redirect, url_for, send_from_directory
+from flask import Flask, request, redirect, url_for, send_from_directory, render_template
 from werkzeug.utils import secure_filename
 
+# app = Flask(__name__,  static_url_path = "uploads", static_folder = "uploads")
 app = Flask(__name__)
 
 # This is the path to the upload directory
@@ -22,6 +23,7 @@ def allowed_file(filename):
 @app.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
+    # return render_template('hello.html', name=name, image=send_from_directory("uploads","motivation_fear.jpg"))
 
 
 # Route that will process the file upload

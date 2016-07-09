@@ -1,7 +1,48 @@
 <!doctype html>
+
+<!-- Include the jQuery library -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <title>Hello from Flask</title>
 {% if name %}
   <h1>Hello {{ name }}!</h1>
 {% else %}
   <h1>Hello, World!</h1>
 {% endif %}
+
+<p id="demo">JavaScript can change HTML content.</p>
+
+<!-- <img id='image' src={{ image }}> -->
+
+<img id='image2' src="/static/sprouts1.jpg">
+
+<button type="button" onclick="changeText();">Click Me!</button>
+
+  
+<body>
+</body>
+
+<script type="text/javascript">
+function changeText(){
+	document.getElementById('demo').innerHTML = 'Hello JavaScript!'
+}
+
+var folder = "/mit/mdeyo/web_scripts/uploads/";
+
+$.ajax({
+    url : folder,
+    success: function (data) {
+    	console.log("success");
+    	console.log(data);
+
+        $(data).find("a").attr("href", function (i, val) {
+            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
+            	console.log(folder+" "+val);
+                $("body").append( "<img src='"+ folder + val +"'>" );
+
+            } 
+        });
+    }
+});
+
+</script>
